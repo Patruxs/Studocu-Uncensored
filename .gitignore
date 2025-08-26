@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Test output and caches
+coverage/
+.vitest/
+test-results/
+playwright-report/
+.cache/
+
+# Generated extension packages
+dist/
+build/
+release/
+web-ext-artifacts/
+*.crx
+*.zip
