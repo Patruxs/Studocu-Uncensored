@@ -15,3 +15,14 @@ release/
 web-ext-artifacts/
 *.crx
 *.zip
+
+# Local browser profiles
+.chrome-profile/
+.chromium-profile/
+web-ext-profile/
+
+# Environment files and signing keys
+.env
+.env.*
+!.env.example
+*.pem
