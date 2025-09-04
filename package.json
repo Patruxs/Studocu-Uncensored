@@ -1,5 +1,7 @@
 {
   "name": "studocu-uncensored",
   "version": "2.0.0",
-  "private": true
+  "private": true,
+  "description": "Remove blur, watermarks, and export Studocu documents to clean PDF.",
+  "type": "module"
 }
