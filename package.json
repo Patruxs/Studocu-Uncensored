@@ -3,5 +3,18 @@
   "version": "2.0.0",
   "private": true,
   "description": "Remove blur, watermarks, and export Studocu documents to clean PDF.",
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/sync-dist.mjs",
+    "dev": "node scripts/sync-dist.mjs --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@vitest/coverage-istanbul": "^4.1.10",
+    "@vitest/coverage-v8": "^4.1.10",
+    "happy-dom": "^20.11.2",
+    "vitest": "^4.1.10"
+  }
 }
