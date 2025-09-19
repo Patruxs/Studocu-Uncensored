@@ -1,0 +1,8 @@
+{
+  "manifest_version": 3,
+  "name": "Studocu Uncensored",
+  "version": "2.0",
+  "description": "Remove blur, watermarks, and export Studocu documents to clean PDF with one click.",
+  "minimum_chrome_version": "101"
+
+}
