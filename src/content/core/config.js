@@ -13,5 +13,9 @@
     WIDTH_SCALE_DIVISOR: 4,
 
 
+    MARGIN_DIVISOR: 4,
+
+
+    FALLBACK_WIDTH_PX: 595.3,
   });
 })(window);
