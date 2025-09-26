@@ -23,5 +23,11 @@
     SCROLL_STEP_PX: 800,
 
 
+    SCROLL_INTERVAL_MS: 500,
+
+
+    SETTLE_TIME_MS: 2500,
+
+
   });
 })(window);
