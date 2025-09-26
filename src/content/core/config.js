@@ -17,5 +17,11 @@
 
 
     FALLBACK_WIDTH_PX: 595.3,
+    FALLBACK_HEIGHT_PX: 841.9,
+
+
+    SCROLL_STEP_PX: 800,
+
+
   });
 })(window);
