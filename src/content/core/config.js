@@ -29,5 +29,14 @@
     SETTLE_TIME_MS: 2500,
 
 
+    MAX_WAIT_TIME_MS: 90_000,
+
+
+    SCROLL_END_THRESHOLD_PX: 50,
+
+
+    PRINT_DELAY_MS: 1000,
+
+
   });
 })(window);
