@@ -38,5 +38,11 @@
     PRINT_DELAY_MS: 1000,
 
 
+    PROGRESS_FADE_DELAY_MS: 1500,
+
+
+    PROGRESS_FADE_OUT_MS: 300,
+
+
   });
 })(window);
