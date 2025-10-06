@@ -44,5 +44,11 @@
     PROGRESS_FADE_OUT_MS: 300,
 
 
+    CONFIRM_DELAY_MS: 1800,
+
+
+    OVERLAY_Z_INDEX_THRESHOLD: 100,
+
+
   });
 })(window);
