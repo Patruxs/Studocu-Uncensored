@@ -50,5 +50,11 @@
     OVERLAY_Z_INDEX_THRESHOLD: 100,
 
 
+    DEFAULT_LANG: "en",
+
+
+    SUPPORTED_LANGS: ["vi", "en"],
+
+
   });
 })(window);
