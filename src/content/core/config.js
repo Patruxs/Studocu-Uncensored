@@ -56,5 +56,9 @@
     SUPPORTED_LANGS: ["vi", "en"],
 
 
+    LOG_PREFIX: "[StudocuHelper]",
+
+
+    LOG_LEVEL: 0,
   });
 })(window);
