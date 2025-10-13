@@ -69,4 +69,27 @@
   STUDOCU.selectors = SELECTORS;
 
 
+  function resolveSelector(sel) {
+    if (typeof sel === "string") return sel;
+    if (sel && typeof sel === "object") {
+      return [sel.primary, sel.fallback].filter(Boolean);
+    }
+    return sel;
+  }
+
+
+  function queryWithFallback(parent, selector) {
+    if (typeof selector === "string") {
+      return parent.querySelector(selector);
+    }
+    if (selector?.primary) {
+      const el = parent.querySelector(selector.primary);
+      if (el) return el;
+      if (selector.fallback) {
+        return parent.querySelector(selector.fallback);
+      }
+    }
+    return null;
+  }
+
 })(window);
