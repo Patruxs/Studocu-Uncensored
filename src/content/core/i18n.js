@@ -148,4 +148,35 @@
     return cfg.lang || cfg.DEFAULT_LANG || "en";
   }
 
+  let currentLang = detectLang();
+
+  STUDOCU.i18n = {
+
+    translate(key, params = {}) {
+      const bundle = STRINGS[key];
+      if (!bundle) {
+        console.warn(`[StudocuHelper] Missing i18n key: ${key}`);
+        return key;
+      }
+
+      let text = bundle[currentLang] ?? bundle.en ?? bundle.vi ?? key;
+
+      for (const [k, v] of Object.entries(params)) {
+        text = text.replaceAll(`{{${k}}}`, String(v));
+      }
+
+      return text;
+    },
+
+
+    lang(lang) {
+      if (lang && STUDOCU.config?.SUPPORTED_LANGS?.includes(lang)) {
+        currentLang = lang;
+      }
+      return currentLang;
+    },
+
+
+    _strings: STRINGS,
+  };
 })(window);
