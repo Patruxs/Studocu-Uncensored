@@ -86,6 +86,11 @@
 
         const observer = new MutationObserver((_mutations, obs) => {
           const el = document.querySelector(selector);
+          if (el) {
+            clearTimeout(timer);
+            obs.disconnect();
+            resolve(el);
+          }
         });
       });
     },
