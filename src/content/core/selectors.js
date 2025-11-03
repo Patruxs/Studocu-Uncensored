@@ -92,4 +92,6 @@
     return null;
   }
 
+  STUDOCU.resolveSelector = resolveSelector;
+  STUDOCU.queryWithFallback = queryWithFallback;
 })(window);
