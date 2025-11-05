@@ -92,6 +92,11 @@
             resolve(el);
           }
         });
+
+        observer.observe(root, {
+          childList: true,
+          subtree: true,
+        });
       });
     },
 
