@@ -43,5 +43,10 @@
     },
 
 
+    async setValue(key, value) {
+      return this.set({ [key]: value });
+    },
+
+
   };
 })(window);
