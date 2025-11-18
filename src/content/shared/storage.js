@@ -48,5 +48,37 @@
     },
 
 
+    getLocal(keys) {
+      if (
+        typeof chrome === "undefined" ||
+        !chrome.storage ||
+        !chrome.storage.local
+      ) {
+        return Promise.resolve({});
+      }
+      return new Promise((resolve) => {
+        chrome.storage.local.get(keys, (data) => resolve(data || {}));
+      });
+    },
+
+
+    setLocal(items) {
+      if (
+        typeof chrome === "undefined" ||
+        !chrome.storage ||
+        !chrome.storage.local
+      ) {
+        return Promise.resolve();
+      }
+      return new Promise((resolve, reject) => {
+        chrome.storage.local.set(items, () => {
+          if (chrome.runtime.lastError) {
+            reject(chrome.runtime.lastError);
+          } else {
+            resolve();
+          }
+        });
+      });
+    },
   };
 })(window);
