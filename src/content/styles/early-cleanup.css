@@ -10,3 +10,5 @@ body {
 .banner-wrapper,
 
 [class*="paywall"],
+[class*="overlay"],
+[class*="modal"],
