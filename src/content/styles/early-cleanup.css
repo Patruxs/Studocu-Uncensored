@@ -16,3 +16,7 @@ body {
 [class*="banner"],
 [class*="upgrade"],
 [class*="premium"],
+
+#page-container-wrapper + div,
+
+.advertisement,
