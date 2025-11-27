@@ -20,3 +20,6 @@ body {
 #page-container-wrapper + div,
 
 .advertisement,
+
+[data-testid*="paywall"],
+[data-testid*="overlay"],
