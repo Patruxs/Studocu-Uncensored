@@ -23,3 +23,12 @@ body {
 
 [data-testid*="paywall"],
 [data-testid*="overlay"],
+[role="dialog"],
+[aria-modal="true"] {
+
+  display: none !important;
+  z-index: -9999 !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
