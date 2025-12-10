@@ -68,4 +68,21 @@
   ];
 
 
+  function isContentContainer(el) {
+    return (
+      el.matches(SEL.PF) ||
+      el.matches(SEL.PC) ||
+      el.matches(SEL.DOCUMENT_WRAPPER) ||
+      el.matches(SEL.PAGE_CONTAINER)
+    );
+  }
+
+  function safeQueryAll(selector) {
+    try {
+      return document.querySelectorAll(selector);
+    } catch {
+      return [];
+    }
+  }
+
 })(window);
