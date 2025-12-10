@@ -32,4 +32,40 @@
   ];
 
 
+  const OVERLAY_SELECTORS = [
+    SEL.UPGRADE_OVERLAY,
+    SEL.BANNER_WRAPPER,
+    SEL.PAYWALL_GENERIC,
+    SEL.OVERLAY_GENERIC,
+    SEL.MODAL_GENERIC,
+    SEL.POPUP_GENERIC,
+    SEL.PAGE_CONTAINER_ADJACENT,
+    SEL.ADVERTISEMENT,
+    '[class*="banner"]',
+    '[class*="upgrade"]',
+    '[class*="premium"]',
+    '[id*="paywall"]',
+    '[id*="overlay"]',
+    '[id*="modal"]',
+    '[data-testid*="paywall"]',
+    '[data-testid*="overlay"]',
+    '[role="dialog"]',
+    '[aria-modal="true"]',
+  ];
+
+
+  const USER_SELECT_SELECTORS = [
+    SEL.PF,
+    SEL.PC,
+    SEL.DOCUMENT_WRAPPER,
+    SEL.PAGE_CONTAINER,
+    ".page-content",
+    "p",
+    "span",
+    "div",
+    "section",
+    "article",
+  ];
+
+
 })(window);
