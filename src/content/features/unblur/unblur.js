@@ -233,4 +233,25 @@
   STUDOCU.unblur = { removeBlurAndWatermark };
 
   /* ── telemetry hook: called by injector/popup ────────── */
+  function removeBlurWithTelemetry() {
+    try {
+      const stats = removeBlurAndWatermark();
+      const tm = STUDOCU.telemetry;
+      if (tm) {
+        if (stats.blursRemoved > 0 || stats.overlaysHidden > 0) {
+          tm.recordUnblurSuccess(stats);
+        } else {
+          tm.recordUnblurFallback();
+        }
+      }
+      return stats;
+    } catch (err) {
+      log.exception("removeBlurWithTelemetry", err);
+      const tm = STUDOCU.telemetry;
+      if (tm) tm.recordCrash();
+      throw err;
+    }
+  }
+
+  STUDOCU.unblur.removeBlurWithTelemetry = removeBlurWithTelemetry;
 })(window);
