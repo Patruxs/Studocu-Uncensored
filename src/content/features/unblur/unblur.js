@@ -230,4 +230,7 @@
     return results;
   }
 
+  STUDOCU.unblur = { removeBlurAndWatermark };
+
+  /* ── telemetry hook: called by injector/popup ────────── */
 })(window);
