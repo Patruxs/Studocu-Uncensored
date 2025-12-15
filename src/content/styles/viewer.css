@@ -1,0 +1,27 @@
+body {
+  background-color: #f6f7fb !important;
+  margin: 0 !important;
+  overflow: auto !important;
+}
+
+#clean-viewer-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 0;
+  z-index: 9999;
+}
+
+.std-page {
+  position: relative !important;
+  background-color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: block !important;
+  overflow: hidden !important;
+  border: none !important;
+}
