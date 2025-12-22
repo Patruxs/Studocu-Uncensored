@@ -85,3 +85,18 @@ body {
   font-size: 48px !important;
   margin-bottom: 16px !important;
 }
+
+.viewer-error .error-title {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: #d9534f !important;
+  margin-bottom: 8px !important;
+}
+
+.viewer-error .error-detail {
+  font-size: 14px !important;
+  color: #666 !important;
+  line-height: 1.6 !important;
+  max-width: 420px !important;
+  margin: 0 auto !important;
+}
