@@ -65,3 +65,11 @@ body {
   z-index: 10;
   overflow: visible !important;
 }
+
+.layer-text .pc,
+.layer-text .pc * {
+  transform: none !important;
+  overflow: visible !important;
+  max-width: none !important;
+  max-height: none !important;
+}
