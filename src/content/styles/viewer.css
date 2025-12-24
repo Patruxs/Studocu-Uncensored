@@ -100,3 +100,67 @@ body {
   max-width: 420px !important;
   margin: 0 auto !important;
 }
+
+.viewer-error .error-steps {
+  text-align: left !important;
+  margin: 16px auto 0 !important;
+  max-width: 380px !important;
+  font-size: 13px !important;
+  color: #555 !important;
+  line-height: 1.8 !important;
+}
+
+@media print {
+  @page {
+    margin: 0;
+    size: auto;
+  }
+
+  body {
+    background-color: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  #clean-viewer-container {
+    position: static !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .std-page {
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    box-shadow: none !important;
+    page-break-after: always !important;
+    break-after: always !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    border: none !important;
+  }
+
+
+  .std-page:last-child {
+    page-break-after: auto !important;
+    break-after: auto !important;
+  }
+
+
+  .std-page::after {
+    display: none !important;
+  }
+
+
+  .layer-bg img {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+
+  .layer-text {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
