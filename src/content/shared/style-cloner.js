@@ -59,4 +59,109 @@
   }
 
 
+  function buildProp(style, prop, scaleOpts = {}) {
+    const raw = style.getPropertyValue(prop);
+    if (!raw || raw === "none" || raw === "auto" || raw === "normal") return "";
+
+    if (scaleOpts.scale && scaleOpts.divisor) {
+      const parsed = parseDimension(raw);
+      if (parsed) {
+        const scaled = parsed.num / scaleOpts.divisor;
+        return `${prop}: ${scaled}${parsed.unit} !important; `;
+      }
+    }
+    return `${prop}: ${raw} !important; `;
+  }
+
+
+  function copyComputedStyle(source, target, scaleFactor, opts = {}) {
+    const {
+      scaleHeight = false,
+      scaleWidth = false,
+      heightDivisor = cfg.HEIGHT_SCALE_DIVISOR || 4,
+      widthDivisor = cfg.WIDTH_SCALE_DIVISOR || 4,
+      scaleMargin = false,
+      marginDivisor = cfg.MARGIN_DIVISOR || 4,
+    } = opts;
+
+    const computed = window.getComputedStyle(source);
+    const parts = [];
+
+    for (const prop of NORMAL_PROPS) {
+      parts.push(buildProp(computed, prop));
+    }
+
+    const widthRaw = computed.getPropertyValue("width");
+    if (widthRaw && widthRaw !== "none" && widthRaw !== "auto") {
+      if (scaleWidth) {
+        const p = parseDimension(widthRaw);
+        if (p) {
+          parts.push(
+            `width: ${p.num / widthDivisor}${p.unit} !important; `
+          );
+        } else {
+          parts.push(`width: ${widthRaw} !important; `);
+        }
+      } else {
+        parts.push(`width: ${widthRaw} !important; `);
+      }
+    }
+
+    const heightRaw = computed.getPropertyValue("height");
+    if (heightRaw && heightRaw !== "none" && heightRaw !== "auto") {
+      if (scaleHeight) {
+        const p = parseDimension(heightRaw);
+        if (p) {
+          parts.push(
+            `height: ${p.num / heightDivisor}${p.unit} !important; `
+          );
+        } else {
+          parts.push(`height: ${heightRaw} !important; `);
+        }
+      } else {
+        parts.push(`height: ${heightRaw} !important; `);
+      }
+    }
+
+    for (const prop of MARGIN_PROPS) {
+      const raw = computed.getPropertyValue(prop);
+      if (!raw || raw === "auto") continue;
+      const parsed = parseDimension(raw);
+      if (!parsed) {
+        parts.push(`${prop}: ${raw} !important; `);
+      } else if (scaleMargin && parsed.num !== 0) {
+        parts.push(
+          `${prop}: ${parsed.num / marginDivisor}${parsed.unit} !important; `
+        );
+      } else {
+        parts.push(`${prop}: ${raw} !important; `);
+      }
+    }
+
+    for (const prop of SCALE_PROPS) {
+      const raw = computed.getPropertyValue(prop);
+      const parsed = parseDimension(raw);
+      if (parsed) {
+        parts.push(
+          `${prop}: ${parsed.num / scaleFactor}${parsed.unit} !important; `
+        );
+      } else if (raw && raw !== "none" && raw !== "auto" && raw !== "normal") {
+        parts.push(`${prop}: ${raw} !important; `);
+      }
+    }
+
+    const tOrigin = computed.getPropertyValue("transform-origin");
+    if (tOrigin) {
+      parts.push(
+        `transform-origin: ${tOrigin} !important; ` +
+          `-webkit-transform-origin: ${tOrigin} !important; `
+      );
+    }
+
+    parts.push(FORCE_STYLES);
+
+    target.style.cssText += parts.join("");
+  }
+
+
 })(window);
