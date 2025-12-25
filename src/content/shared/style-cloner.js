@@ -29,4 +29,15 @@
   ]);
 
 
+  const SCALE_PROPS = Object.freeze(["font-size", "line-height"]);
+
+
+  const MARGIN_PROPS = Object.freeze([
+    "margin-top",
+    "margin-right",
+    "margin-bottom",
+    "margin-left",
+  ]);
+
+
 })(window);
