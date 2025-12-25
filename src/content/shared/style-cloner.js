@@ -40,4 +40,23 @@
   ]);
 
 
+  const FORCE_STYLES =
+    "overflow: visible !important; " +
+    "max-width: none !important; " +
+    "max-height: none !important; " +
+    "clip: auto !important; " +
+    "clip-path: none !important; ";
+
+
+  function parseDimension(value) {
+    if (!value || value === "none" || value === "auto" || value === "normal") {
+      return null;
+    }
+    const num = parseFloat(value);
+    if (isNaN(num) || num === 0) return null;
+    const unit = value.replace(String(num), "");
+    return { num, unit };
+  }
+
+
 })(window);
