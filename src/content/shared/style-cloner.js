@@ -164,4 +164,79 @@
   }
 
 
+  function deepCloneWithStyles(
+    element,
+    scaleFactor,
+    heightScaleDivisor,
+    depth = 0
+  ) {
+    const clone = element.cloneNode(false);
+
+    const textClass = S.TEXT_CLASS || "t";
+    const underClass = S.UNDERSCORE_CLASS || "_";
+    const pcClass = S.PC_CLASS || "pc";
+    const regex = S.UNDERSCORE_SPAN_REGEX || /^_(?:\d+[a-z]*|[a-z]+\d*)$/i;
+
+    const hasTextClass = dom.hasClass(element, textClass);
+    const hasUnderscoreClass = dom.hasClass(element, underClass);
+
+    const shouldScaleMargin =
+      element.tagName === "SPAN" &&
+      dom.hasClass(element, underClass) &&
+      dom.hasClassMatching(element, regex);
+
+    copyComputedStyle(element, clone, scaleFactor, {
+      scaleHeight: hasTextClass,
+      scaleWidth: hasUnderscoreClass,
+      heightDivisor: heightScaleDivisor,
+      widthDivisor: cfg.WIDTH_SCALE_DIVISOR || 4,
+      scaleMargin: shouldScaleMargin,
+      marginDivisor: scaleFactor,
+    });
+
+    if (dom.hasClass(element, pcClass)) {
+      clone.style.setProperty("transform", "none", "important");
+      clone.style.setProperty("-webkit-transform", "none", "important");
+      clone.style.setProperty("overflow", "visible", "important");
+      clone.style.setProperty("max-width", "none", "important");
+      clone.style.setProperty("max-height", "none", "important");
+    }
+
+    if (
+      element.childNodes.length === 1 &&
+      element.childNodes[0].nodeType === Node.TEXT_NODE
+    ) {
+      clone.textContent = element.textContent;
+    } else {
+      for (const child of element.childNodes) {
+        try {
+          if (child.nodeType === Node.ELEMENT_NODE) {
+            clone.appendChild(
+              deepCloneWithStyles(
+                child,
+                scaleFactor,
+                heightScaleDivisor,
+                depth + 1
+              )
+            );
+          } else if (child.nodeType === Node.TEXT_NODE) {
+            clone.appendChild(child.cloneNode(true));
+          }
+        } catch (childErr) {
+          STUDOCU.logger?.exception(
+            `deepCloneWithStyles: child depth ${depth}`,
+            childErr
+          );
+          // continue with next child; don't lose the whole page
+        }
+      }
+    }
+
+    return clone;
+  }
+
+  STUDOCU.styleCloner = {
+    copyComputedStyle,
+    deepCloneWithStyles,
+  };
 })(window);
