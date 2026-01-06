@@ -9,4 +9,12 @@
   const DEFAULT_SCROLL_INTERVAL = cfg.SCROLL_INTERVAL_MS ?? 500;
   const DEFAULT_SETTLE_TIME = cfg.SETTLE_TIME_MS ?? 2500;
   const DEFAULT_MAX_WAIT = cfg.MAX_WAIT_TIME_MS ?? 90000;
+  const SCROLL_END_THRESHOLD = cfg.SCROLL_END_THRESHOLD_PX ?? 50;
+
+
+  function countPages() {
+    return document.querySelectorAll(PAGE_SEL).length;
+  }
+
+
 })(window);
