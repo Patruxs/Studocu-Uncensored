@@ -17,4 +17,17 @@
   }
 
 
+  function canScrollMore() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    return scrollTop + clientHeight < scrollHeight - SCROLL_END_THRESHOLD;
+  }
+
+
+  function scrollBy(px) {
+    window.scrollBy({ top: px, behavior: "auto" });
+  }
+
+
 })(window);
