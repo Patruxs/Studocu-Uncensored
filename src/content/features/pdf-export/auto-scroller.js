@@ -30,4 +30,119 @@
   }
 
 
+  async function scrollAndLoadAllPages(options = {}) {
+    const {
+      onProgress = () => {},
+      scrollStep = DEFAULT_SCROLL_STEP,
+      scrollInterval = DEFAULT_SCROLL_INTERVAL,
+      settleTime = DEFAULT_SETTLE_TIME,
+      maxWaitTime = DEFAULT_MAX_WAIT,
+    } = options;
+
+    const initialPages = countPages();
+    const startTime = Date.now();
+
+    onProgress(initialPages, initialPages);
+    log.debug("Auto-scroll start, initial pages:", initialPages);
+
+    if (initialPages > 0 && !canScrollMore()) {
+      log.debug("Already at bottom, skipping scroll.");
+      return { totalPages: initialPages, scrolled: false };
+    }
+
+    let lastPageCount = initialPages;
+    let lastNewPageTime = Date.now();
+    let newPagesTotal = 0;
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+          if (node.nodeType !== Node.ELEMENT_NODE) continue;
+
+          if (node.matches?.(PAGE_SEL)) {
+            newPagesTotal++;
+            lastNewPageTime = Date.now();
+            continue;
+          }
+
+          if (node.querySelectorAll) {
+            try {
+              const inner = node.querySelectorAll(PAGE_SEL);
+              if (inner.length > 0) {
+                newPagesTotal += inner.length;
+                lastNewPageTime = Date.now();
+              }
+            } catch {
+
+            }
+          }
+        }
+      }
+    });
+
+    observer.observe(document.body || document.documentElement, {
+      childList: true,
+      subtree: true,
+    });
+
+    return new Promise((resolve) => {
+      let scrollCount = 0;
+      let lastProgressPages = initialPages;
+
+      function tick() {
+        const elapsed = Date.now() - startTime;
+        const currentPages = countPages();
+
+        if (currentPages > lastPageCount) {
+          lastPageCount = currentPages;
+          lastNewPageTime = Date.now();
+        }
+
+        if (currentPages !== lastProgressPages) {
+          lastProgressPages = currentPages;
+          onProgress(currentPages, currentPages);
+        }
+
+        const timeSinceNewPage = Date.now() - lastNewPageTime;
+
+        if (elapsed >= maxWaitTime) {
+          log.debug("Auto-scroll: max wait reached, pages:", currentPages);
+          observer.disconnect();
+          onProgress(currentPages, currentPages);
+          resolve({ totalPages: currentPages, scrolled: scrollCount > 0 });
+          return;
+        }
+
+        if (timeSinceNewPage >= settleTime && scrollCount > 0) {
+          log.debug("Auto-scroll: settled, pages:", currentPages);
+          observer.disconnect();
+          onProgress(currentPages, currentPages);
+          resolve({ totalPages: currentPages, scrolled: true });
+          return;
+        }
+
+        if (!canScrollMore() && timeSinceNewPage >= settleTime) {
+          log.debug("Auto-scroll: bottom reached, pages:", currentPages);
+          observer.disconnect();
+          onProgress(currentPages, currentPages);
+          resolve({ totalPages: currentPages, scrolled: scrollCount > 0 });
+          return;
+        }
+
+        if (canScrollMore()) {
+          scrollBy(scrollStep);
+          scrollCount++;
+        }
+
+        setTimeout(tick, scrollInterval);
+      }
+
+      tick();
+    });
+  }
+
+  STUDOCU.autoScroller = {
+    scrollAndLoadAllPages,
+    countPages,
+  };
 })(window);
