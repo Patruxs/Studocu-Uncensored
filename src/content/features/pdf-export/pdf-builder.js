@@ -24,6 +24,60 @@
 
     let successCount = 0;
 
+    const pageArray = Array.from(pages || []);
+    for (const [index, page] of pageArray.entries()) {
+      try {
+
+        const pc = dom.getPageContent(page);
+        const size = dom.getElementSize(pc);
+        const width = size?.width ?? FALLBACK_WIDTH;
+        const height = size?.height ?? FALLBACK_HEIGHT;
+
+        const newPage = document.createElement("div");
+        newPage.className = STD_PAGE;
+        newPage.id = `page-${index + 1}`;
+        newPage.setAttribute("data-page-number", String(index + 1));
+        newPage.style.width = `${width}px`;
+        newPage.style.height = `${height}px`;
+
+        const originalImg = dom.getBgImage(page);
+        if (originalImg) {
+          const bgLayer = document.createElement("div");
+          bgLayer.className = LAYER_BG;
+          const imgClone =  (originalImg.cloneNode(true));
+          imgClone.style.cssText =
+            "width: 100%; height: 100%; object-fit: cover; object-position: top center";
+          bgLayer.appendChild(imgClone);
+          newPage.appendChild(bgLayer);
+        }
+
+        const originalPc = dom.getPageContent(page);
+        if (originalPc) {
+          const textLayer = document.createElement("div");
+          textLayer.className = LAYER_TEXT;
+
+          const pcClone = cloneModule.deepCloneWithStyles(
+            originalPc,
+            scaleFactor,
+            heightDivisor
+          );
+
+          const imgs = pcClone.querySelectorAll("img");
+          for (const img of imgs) {
+            img.style.display = "none";
+          }
+
+          textLayer.appendChild(pcClone);
+          newPage.appendChild(textLayer);
+        }
+
+        container.appendChild(newPage);
+        successCount++;
+      } catch (err) {
+        log.exception(`buildViewerContainer: page ${index + 1}`, err);
+      }
+    }
+
     return String(str).replace(/[&<>"']/g, (c) => map[c] || c);
   }
 
