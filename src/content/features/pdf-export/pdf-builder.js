@@ -78,6 +78,8 @@
       }
     }
 
+    log.info(`Built viewer: ${successCount}/${pageArray.length} pages`);
+    return { container, successCount };
     return String(str).replace(/[&<>"']/g, (c) => map[c] || c);
   }
 
