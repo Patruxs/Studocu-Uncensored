@@ -80,6 +80,13 @@
 
     log.info(`Built viewer: ${successCount}/${pageArray.length} pages`);
     return { container, successCount };
+  }
+
+
+  function injectBodyHideStyle() {
+    const existing = document.getElementById(S.BODY_HIDE_STYLE_ID || "studocu-hide-body");
+    if (existing) return existing;
+
     return String(str).replace(/[&<>"']/g, (c) => map[c] || c);
   }
 
