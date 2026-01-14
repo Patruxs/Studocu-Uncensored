@@ -87,6 +87,8 @@
     const existing = document.getElementById(S.BODY_HIDE_STYLE_ID || "studocu-hide-body");
     if (existing) return existing;
 
+    const style = document.createElement("style");
+    style.id = S.BODY_HIDE_STYLE_ID || "studocu-hide-body";
     return String(str).replace(/[&<>"']/g, (c) => map[c] || c);
   }
 
