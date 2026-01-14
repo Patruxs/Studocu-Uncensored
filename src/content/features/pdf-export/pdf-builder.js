@@ -89,6 +89,13 @@
 
     const style = document.createElement("style");
     style.id = S.BODY_HIDE_STYLE_ID || "studocu-hide-body";
+    style.textContent = [
+      `body > *:not(#${VIEWER_ID}) {`,
+      "  display: none !important;",
+      "}",
+    ].join("\n");
+    document.head.appendChild(style);
+    return style;
     return String(str).replace(/[&<>"']/g, (c) => map[c] || c);
   }
 
