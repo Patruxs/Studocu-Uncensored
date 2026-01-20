@@ -96,6 +96,12 @@
     ].join("\n");
     document.head.appendChild(style);
     return style;
+  }
+
+
+  function removeBodyHideStyle() {
+    const el = document.getElementById(S.BODY_HIDE_STYLE_ID || "studocu-hide-body");
+    if (el?.parentNode) el.parentNode.removeChild(el);
     return String(str).replace(/[&<>"']/g, (c) => map[c] || c);
   }
 
