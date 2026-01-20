@@ -102,6 +102,12 @@
   function removeBodyHideStyle() {
     const el = document.getElementById(S.BODY_HIDE_STYLE_ID || "studocu-hide-body");
     if (el?.parentNode) el.parentNode.removeChild(el);
+  }
+
+  function printViewer(container) {
+    const existing = document.getElementById(VIEWER_ID);
+    if (existing && existing !== container) existing.remove();
+
     return String(str).replace(/[&<>"']/g, (c) => map[c] || c);
   }
 
