@@ -108,6 +108,9 @@
     const existing = document.getElementById(VIEWER_ID);
     if (existing && existing !== container) existing.remove();
 
+    document.body.appendChild(container);
+    injectBodyHideStyle();
+
     return String(str).replace(/[&<>"']/g, (c) => map[c] || c);
   }
 
