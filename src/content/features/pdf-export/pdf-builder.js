@@ -111,6 +111,15 @@
     document.body.appendChild(container);
     injectBodyHideStyle();
 
+    const cleanup = () => {
+      if (container?.parentNode) container.parentNode.removeChild(container);
+      removeBodyHideStyle();
+      window.removeEventListener("afterprint", cleanup);
+      log.info("Print viewer closed, original page restored.");
+    };
+
+    window.addEventListener("afterprint", cleanup, { once: true });
+
     return String(str).replace(/[&<>"']/g, (c) => map[c] || c);
   }
 
