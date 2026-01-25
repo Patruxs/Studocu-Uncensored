@@ -120,6 +120,26 @@
 
     window.addEventListener("afterprint", cleanup, { once: true });
 
+    setTimeout(() => {
+      try {
+        log.info("Opening browser print dialog...");
+        window.print();
+      } catch (err) {
+        cleanup();
+        log.exception("printViewer", err);
+      }
+    }, PRINT_DELAY);
+  }
+
+
+  function escapeHtml(str) {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    };
     return String(str).replace(/[&<>"']/g, (c) => map[c] || c);
   }
 
