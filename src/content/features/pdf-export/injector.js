@@ -11,4 +11,14 @@
 
   const { config: cfg, logger: log, i18n, selectors: S, dom } = STUDOCU;
 
+  if (!dom?.getAllPages) {
+    log?.error("dom module missing - aborting");
+    (STUDOCU.telemetry?.recordCrash) && STUDOCU.telemetry.recordCrash();
+    return;
+  }
+  if (!STUDOCU.autoScroller?.scrollAndLoadAllPages) {
+    log?.error("autoScroller module missing - aborting");
+    (STUDOCU.telemetry?.recordCrash) && STUDOCU.telemetry.recordCrash();
+    return;
+  }
 })(window);
