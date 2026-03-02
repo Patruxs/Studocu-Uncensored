@@ -29,4 +29,6 @@
 
   const t = (key, params) => (i18n?.translate || ((k) => k))(key, params);
 
+  const SCALE_FACTOR = cfg?.SCALE_FACTOR ?? 4;
+  const HEIGHT_DIVISOR = cfg?.HEIGHT_SCALE_DIVISOR ?? 4;
 })(window);
