@@ -142,4 +142,91 @@
   }
 
 
+  async function runCleanViewer() {
+    log.info("runCleanViewer started");
+    (STUDOCU.telemetry?.recordExportAttempt) && STUDOCU.telemetry.recordExportAttempt();
+
+    createProgressOverlay();
+    updateProgress(0, 0);
+
+    let scrollResult;
+    try {
+      scrollResult = await STUDOCU.autoScroller.scrollAndLoadAllPages({
+        scrollStep: cfg?.SCROLL_STEP_PX ?? 800,
+        scrollInterval: cfg?.SCROLL_INTERVAL_MS ?? 500,
+        settleTime: cfg?.SETTLE_TIME_MS ?? 2500,
+        maxWaitTime: cfg?.MAX_WAIT_TIME_MS ?? 90_000,
+        onProgress: (loaded, total) => updateProgress(loaded, total),
+      });
+    } catch (err) {
+      log.exception("auto-scroll", err);
+      removeProgressOverlay();
+      STUDOCU.pdfBuilder.showErrorInViewer(
+        t("viewer.errorTitle"),
+        t("error.autoScrollFailed", { message: err.message })
+      );
+      return;
+    }
+
+    const pages = dom.getAllPages();
+
+    if (pages.length === 0) {
+      removeProgressOverlay();
+
+      STUDOCU.pdfBuilder.showErrorInViewer(
+        t("viewer.errorTitle"),
+        t("viewer.errorNoPages"),
+        t("viewer.errorNoPagesHint")
+      );
+      return;
+    }
+
+    finishProgress(pages.length);
+
+    await new Promise((r) => setTimeout(r, CONFIRM_DELAY));
+
+    const confirmMsg = scrollResult?.scrolled
+      ? t("confirm.title", { count: pages.length })
+      : t("confirm.titleNoScroll", { count: pages.length });
+
+    if (!confirm(confirmMsg)) {
+      log.info("User cancelled");
+      return;
+    }
+
+    const result = STUDOCU.pdfBuilder.buildViewerContainer(
+      pages,
+      SCALE_FACTOR,
+      HEIGHT_DIVISOR
+    );
+
+    if (!result?.container || result.successCount === 0) {
+
+      STUDOCU.pdfBuilder.showErrorInViewer(
+        t("viewer.errorTitle"),
+        t("viewer.errorNoProcessed")
+      );
+      return;
+    }
+
+    STUDOCU.pdfBuilder.printViewer(result.container);
+    (STUDOCU.telemetry?.recordExportSuccess) &&
+      STUDOCU.telemetry.recordExportSuccess(result.successCount);
+    log.info("runCleanViewer complete -", result.successCount, "pages - print opened");
+  }
+
+  runCleanViewer().catch((err) => {
+    log.exception("runCleanViewer", err);
+    removeProgressOverlay();
+    (STUDOCU.telemetry?.recordExportFailure) && STUDOCU.telemetry.recordExportFailure();
+
+    try {
+      STUDOCU.pdfBuilder.showErrorInViewer(
+        t("viewer.errorTitle"),
+        t("error.crash", { message: err.message })
+      );
+    } catch {
+      alert(t("error.crash", { message: err.message }));
+    }
+  });
 })(window);
