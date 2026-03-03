@@ -41,4 +41,82 @@
   const PROGRESS_BADGE_ID = S?.PROGRESS_BADGE_ID || "studocu-progress-badge";
 
 
+  function createProgressOverlay() {
+
+    const existing = document.getElementById(PROGRESS_OVERLAY_ID);
+    if (existing) existing.remove();
+
+    const overlay = document.createElement("div");
+    overlay.id = PROGRESS_OVERLAY_ID;
+    overlay.style.cssText = [
+      "position:fixed;top:0;left:0;right:0;z-index:999999;",
+      "background:linear-gradient(135deg,#007bff 0%,#00b4d8 100%);",
+      "color:white;padding:14px 20px;",
+      "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;",
+      "font-size:14px;font-weight:600;",
+      "text-align:center;box-shadow:0 2px 16px rgba(0,0,0,0.25);",
+      "display:flex;align-items:center;justify-content:center;gap:12px;",
+      "transition:opacity 0.3s ease;",
+    ].join("");
+
+    const textEl = document.createElement("span");
+    textEl.id = PROGRESS_TEXT_ID;
+    textEl.textContent = t("progress.loading");
+    textEl.style.whiteSpace = "nowrap";
+    overlay.appendChild(textEl);
+
+    const barOuter = document.createElement("div");
+    barOuter.style.cssText = [
+      "width:180px;height:6px;background:rgba(255,255,255,0.3);",
+      "border-radius:3px;overflow:hidden;flex-shrink:0;",
+    ].join("");
+    const barInner = document.createElement("div");
+    barInner.id = PROGRESS_BAR_ID;
+    barInner.style.cssText = [
+      "height:100%;background:white;border-radius:3px;",
+      "transition:width 0.4s ease;width:0%;",
+    ].join("");
+    barOuter.appendChild(barInner);
+    overlay.appendChild(barOuter);
+
+    const badge = document.createElement("span");
+    badge.id = PROGRESS_BADGE_ID;
+    badge.style.cssText = [
+      "background:rgba(255,255,255,0.25);padding:2px 10px;",
+      "border-radius:10px;font-size:13px;white-space:nowrap;",
+    ].join("");
+    badge.textContent = t("progress.pages", { count: 0 });
+    overlay.appendChild(badge);
+
+    document.body.insertBefore(overlay, document.body.firstChild);
+    return overlay;
+  }
+
+
+  function updateProgress(loaded, total) {
+    const textEl = document.getElementById(PROGRESS_TEXT_ID);
+    const bar = document.getElementById(PROGRESS_BAR_ID);
+    const badge = document.getElementById(PROGRESS_BADGE_ID);
+
+    if (textEl) {
+      textEl.textContent =
+        total && total > loaded
+          ? t("progress.loadingDetail", { loaded, total })
+          : t("progress.loading");
+    }
+    if (badge) {
+      badge.textContent = t("progress.pages", { count: loaded });
+    }
+    if (bar) {
+      let pct;
+      if (total && total > loaded) {
+        pct = Math.min(95, Math.round((loaded / total) * 100));
+      } else {
+        pct = Math.min(90, loaded * 5);
+      }
+      bar.style.width = `${pct}%`;
+    }
+  }
+
+
 })(window);
