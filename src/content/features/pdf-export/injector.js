@@ -35,4 +35,6 @@
   const PROGRESS_FADE_OUT = cfg?.PROGRESS_FADE_OUT_MS ?? 300;
   const CONFIRM_DELAY = cfg?.CONFIRM_DELAY_MS ?? 1800;
 
+  const PROGRESS_OVERLAY_ID = S?.PROGRESS_OVERLAY_ID || "studocu-progress-overlay";
+  const PROGRESS_TEXT_ID = S?.PROGRESS_TEXT_ID || "studocu-progress-text";
 })(window);
