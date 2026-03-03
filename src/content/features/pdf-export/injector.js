@@ -37,4 +37,8 @@
 
   const PROGRESS_OVERLAY_ID = S?.PROGRESS_OVERLAY_ID || "studocu-progress-overlay";
   const PROGRESS_TEXT_ID = S?.PROGRESS_TEXT_ID || "studocu-progress-text";
+  const PROGRESS_BAR_ID = S?.PROGRESS_BAR_ID || "studocu-progress-bar";
+  const PROGRESS_BADGE_ID = S?.PROGRESS_BADGE_ID || "studocu-progress-badge";
+
+
 })(window);
