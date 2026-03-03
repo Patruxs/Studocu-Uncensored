@@ -119,4 +119,27 @@
   }
 
 
+  function finishProgress(count) {
+    const bar = document.getElementById(PROGRESS_BAR_ID);
+    const textEl = document.getElementById(PROGRESS_TEXT_ID);
+    const badge = document.getElementById(PROGRESS_BADGE_ID);
+
+    if (bar) bar.style.width = "100%";
+    if (textEl) textEl.textContent = t("progress.done", { count });
+    if (badge) badge.textContent = t("progress.pages", { count });
+
+    setTimeout(removeProgressOverlay, PROGRESS_FADE_DELAY);
+  }
+
+
+  function removeProgressOverlay() {
+    const overlay = document.getElementById(PROGRESS_OVERLAY_ID);
+    if (!overlay) return;
+    overlay.style.opacity = "0";
+    setTimeout(() => {
+      if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    }, PROGRESS_FADE_OUT);
+  }
+
+
 })(window);
