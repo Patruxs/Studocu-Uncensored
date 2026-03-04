@@ -20,6 +20,49 @@
   "options_ui": {
     "page": "src/options/options.html",
     "open_in_tab": false
-  }
+  },
 
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "Studocu Uncensored"
+  },
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; base-uri 'self'; form-action 'none'"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.studocu.com/*",
+        "*://*.studocu.vn/*"
+      ],
+      "css": ["src/content/styles/early-cleanup.css"],
+      "run_at": "document_start"
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/content/styles/viewer.css",
+        "src/content/core/config.js",
+        "src/content/core/logger.js",
+        "src/content/core/i18n.js",
+        "src/content/core/selectors.js",
+        "src/content/shared/dom-utils.js",
+        "src/content/shared/storage.js",
+        "src/content/shared/style-cloner.js",
+        "src/content/shared/telemetry.js",
+        "src/content/features/unblur/unblur.js",
+        "src/content/features/pdf-export/auto-scroller.js",
+        "src/content/features/pdf-export/pdf-builder.js",
+        "src/content/features/pdf-export/injector.js"
+      ],
+      "matches": [
+        "*://*.studocu.com/*",
+        "*://*.studocu.vn/*"
+      ]
+    }
+  ]
 }
