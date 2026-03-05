@@ -7,6 +7,39 @@
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
+  <main class="shell">
+    <header class="masthead">
+      <div class="brand-mark" aria-hidden="true">SU</div>
+      <div class="brand-copy">
+        <h1>Studocu<br>Uncensored</h1>
+        <p data-i18n="popup.brand.subtitle">Document tools</p>
+      </div>
+      <div class="site-context" id="site-context" data-i18n="popup.siteContext.checking">Checking tab</div>
+    </header>
+
+    <section class="task-status" id="status" data-state="ready" aria-labelledby="status-label">
+      <div class="status-heading">
+        <div>
+          <span class="status-label" id="status-label">Status</span>
+          <p class="status-text" id="status-text" role="status" aria-live="polite" data-i18n="status.ready.title">Ready for a document</p>
+        </div>
+        <span class="progress-value" id="progress-value" aria-hidden="true">0%</span>
+      </div>
+
+      <div
+        class="progress-track"
+        id="progress-track"
+        role="progressbar"
+        aria-label="Task progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+      >
+        <span class="progress-fill" id="progress-fill"></span>
+      </div>
+      <p class="status-detail" id="status-detail" data-i18n="status.ready.detail">Choose an action below to begin.</p>
+    </section>
+
   </main>
 
   <script src="i18n.js"></script>
