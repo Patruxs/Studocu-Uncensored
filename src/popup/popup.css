@@ -1,0 +1,23 @@
+:root {
+  color-scheme: light dark;
+  --page: #f1f2ec;
+  --surface: #fafbf6;
+  --surface-muted: #e7e9e1;
+  --ink: #171a17;
+  --ink-soft: #60665f;
+  --line: #cfd3ca;
+  --accent: #a8bd49;
+  --accent-strong: #718328;
+  --accent-ink: #171a17;
+  --error: #a9443f;
+  --error-surface: #f4e4e1;
+  --shadow: 0 18px 44px rgba(50, 58, 47, 0.16);
+  --radius: 14px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
