@@ -34,3 +34,25 @@ body {
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
 }
+
+button {
+  font: inherit;
+}
+
+.shell {
+  width: 372px;
+  min-height: 498px;
+  padding: 22px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 0 74%, rgba(113, 131, 40, 0.06) 74% 74.5%, transparent 74.5%),
+    var(--page);
+}
+
+.masthead {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: start;
+  gap: 12px;
+  margin-bottom: 24px;
+}
