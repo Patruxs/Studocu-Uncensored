@@ -21,3 +21,16 @@
 }
 
 html,
+body {
+  margin: 0;
+  min-width: 372px;
+  min-height: 498px;
+}
+
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: "Avenir Next", Avenir, "Segoe UI Variable", "Segoe UI", sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
