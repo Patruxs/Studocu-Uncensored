@@ -40,6 +40,30 @@
       <p class="status-detail" id="status-detail" data-i18n="status.ready.detail">Choose an action below to begin.</p>
     </section>
 
+    <section class="actions" aria-label="Document actions">
+      <button id="checkBtn" class="action action-export" type="button">
+        <span class="action-index" aria-hidden="true">PDF</span>
+        <span class="action-copy">
+          <span class="action-title" data-i18n="popup.pdfBtn.title">Build clean PDF</span>
+          <span class="action-description" data-i18n="popup.pdfBtn.desc">Load every available page, preview, then print.</span>
+        </span>
+        <span class="action-arrow" aria-hidden="true">↗</span>
+      </button>
+
+      <button id="clearBtn" class="action action-clean" type="button">
+        <span class="action-index" aria-hidden="true">Aa</span>
+        <span class="action-copy">
+          <span class="action-title" data-i18n="popup.unblurBtn.title">Clean this page</span>
+          <span class="action-description" data-i18n="popup.unblurBtn.desc">Remove blur and restore text selection.</span>
+        </span>
+        <span class="action-arrow" aria-hidden="true">→</span>
+      </button>
+    </section>
+
+    <footer class="footnote">
+      <span data-i18n="popup.footnote.local">Runs locally in this tab</span>
+      <span class="keyboard-hint" data-i18n="popup.footnote.esc">Esc closes preview</span>
+    </footer>
   </main>
 
   <script src="i18n.js"></script>
