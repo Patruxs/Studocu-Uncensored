@@ -158,3 +158,21 @@ button {
   font-weight: 700;
   text-align: right;
 }
+
+.progress-track {
+  height: 5px;
+  margin-top: 18px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--surface-muted);
+}
+
+.progress-fill {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent-strong);
+  transform-origin: left center;
+  transition: width 480ms var(--ease);
+}
