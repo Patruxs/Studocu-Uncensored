@@ -130,3 +130,31 @@ button {
   justify-content: space-between;
   gap: 20px;
 }
+
+.status-label {
+  display: block;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.status-text {
+  max-width: 235px;
+  min-height: 23px;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 720;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.progress-value {
+  position: relative;
+  z-index: 1;
+  min-width: 38px;
+  color: var(--accent-strong);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  text-align: right;
+}
