@@ -90,3 +90,22 @@ button {
   font-size: 10px;
   letter-spacing: 0.04em;
 }
+
+.site-context {
+  max-width: 96px;
+  padding-top: 3px;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.task-status {
+  position: relative;
+  padding: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
