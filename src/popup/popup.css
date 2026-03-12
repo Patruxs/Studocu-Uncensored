@@ -176,3 +176,12 @@ button {
   transform-origin: left center;
   transition: width 480ms var(--ease);
 }
+
+.task-status[data-state="working"] .progress-fill {
+  background: var(--accent);
+}
+
+.task-status[data-state="error"] {
+  border-color: color-mix(in srgb, var(--error) 38%, var(--line));
+  background: var(--error-surface);
+}
