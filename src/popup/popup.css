@@ -185,3 +185,11 @@ button {
   border-color: color-mix(in srgb, var(--error) 38%, var(--line));
   background: var(--error-surface);
 }
+
+.task-status[data-state="error"] .progress-fill {
+  background: var(--error);
+}
+
+.task-status[data-state="error"] .progress-value {
+  color: var(--error);
+}
