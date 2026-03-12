@@ -193,3 +193,17 @@ button {
 .task-status[data-state="error"] .progress-value {
   color: var(--error);
 }
+
+.status-detail {
+  min-height: 30px;
+  margin: 11px 0 0;
+  color: var(--ink-soft);
+  font-size: 11px;
+  line-height: 1.42;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 15px;
+}
