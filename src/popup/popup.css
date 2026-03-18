@@ -231,3 +231,17 @@ button {
   outline: 3px solid color-mix(in srgb, var(--accent) 58%, transparent);
   outline-offset: 2px;
 }
+
+.action:hover {
+  transform: translateY(-2px);
+}
+
+.action:active {
+  transform: scale(0.985);
+}
+
+.action:disabled {
+  cursor: wait;
+  opacity: 0.52;
+  transform: none;
+}
