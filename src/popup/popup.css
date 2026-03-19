@@ -245,3 +245,13 @@ button {
   opacity: 0.52;
   transform: none;
 }
+
+.action-export {
+  background: var(--ink);
+  color: var(--surface);
+  box-shadow: 0 10px 24px rgba(37, 43, 35, 0.16);
+}
+
+.action-export:hover {
+  box-shadow: 0 14px 30px rgba(37, 43, 35, 0.22);
+}
