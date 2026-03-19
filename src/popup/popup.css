@@ -299,3 +299,17 @@ button {
   letter-spacing: -0.015em;
   white-space: nowrap;
 }
+
+.action-description {
+  max-width: 220px;
+  color: inherit;
+  font-size: 11px;
+  line-height: 1.35;
+  opacity: 0.68;
+}
+
+.action-arrow {
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 220ms var(--ease);
+}
