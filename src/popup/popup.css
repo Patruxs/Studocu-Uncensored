@@ -313,3 +313,18 @@ button {
   line-height: 1;
   transition: transform 220ms var(--ease);
 }
+
+.action:hover .action-arrow {
+  transform: translate(2px, -2px);
+}
+
+.action-clean:hover .action-arrow {
+  transform: translateX(3px);
+}
+
+.footnote {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 18px;
+}
