@@ -365,3 +365,40 @@ button {
     box-shadow: 0 14px 30px rgba(3, 5, 3, 0.38);
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .masthead,
+  .task-status,
+  .actions,
+  .footnote {
+    animation: enter 480ms var(--ease) both;
+  }
+
+  .task-status {
+    animation-delay: 55ms;
+  }
+
+  .actions {
+    animation-delay: 105ms;
+  }
+
+  .footnote {
+    animation-delay: 155ms;
+  }
+
+  .task-status[data-state="working"]::after {
+    animation: orbit 1800ms ease-in-out infinite alternate;
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
