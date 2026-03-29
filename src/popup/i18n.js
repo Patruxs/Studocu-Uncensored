@@ -157,4 +157,10 @@
   };
 
   /* ── helpers ───────────────────────────────────────────── */
+  let currentLang = "en";
+
+  function detectLang() {
+    return currentLang;
+  }
+
 })();
