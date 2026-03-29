@@ -163,4 +163,28 @@
     return currentLang;
   }
 
+  function translate(key, params) {
+    const bundle = STRINGS[key];
+    if (!bundle) {
+      console.warn(`[StudocuHelper] Missing popup i18n key: ${key}`);
+      return key;
+    }
+    let text = bundle[currentLang] ?? bundle.en ?? bundle.vi ?? key;
+    if (params) {
+      for (const [k, v] of Object.entries(params)) {
+        text = text.replaceAll(`{{${k}}}`, String(v));
+      }
+    }
+    return text;
+  }
+
+  async function loadLang() {
+    try {
+      const data = await chrome.storage.sync.get("lang");
+      if (data.lang && (data.lang === "vi" || data.lang === "en")) {
+        currentLang = data.lang;
+      }
+    } catch (_) { /* keep default "en" */ }
+  }
+
 })();
