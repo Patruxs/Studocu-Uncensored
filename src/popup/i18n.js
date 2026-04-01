@@ -187,4 +187,30 @@
     } catch (_) { /* keep default "en" */ }
   }
 
+  /* ── DOM updater ───────────────────────────────────────── */
+  function updateDOM(root) {
+    if (!root) root = document;
+
+    /* elements with [data-i18n] */
+    const elements = root.querySelectorAll("[data-i18n]");
+    for (const el of elements) {
+      const key = el.getAttribute("data-i18n");
+      const text = translate(key);
+      if (text && text !== key) {
+        el.textContent = text;
+      }
+    }
+
+    /* elements with [data-i18n-title] */
+    const titles = root.querySelectorAll("[data-i18n-title]");
+    for (const el of titles) {
+      const key = el.getAttribute("data-i18n-title");
+      const text = translate(key);
+      if (text && text !== key) {
+        el.title = text;
+        el.setAttribute("aria-label", text);
+      }
+    }
+  }
+
 })();
