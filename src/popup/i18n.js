@@ -213,4 +213,12 @@
     }
   }
 
+  /* ── expose ────────────────────────────────────────────── */
+  window.__POPUP_I18N__ = {
+    translate,
+    lang: (l) => { if (l) currentLang = l; return currentLang; },
+    loadLang,
+    updateDOM,
+    _strings: STRINGS,
+  };
 })();
