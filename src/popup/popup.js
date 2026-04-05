@@ -3,3 +3,5 @@ const statusText = document.getElementById("status-text");
 const statusDetail = document.getElementById("status-detail");
 const progressTrack = document.getElementById("progress-track");
 const progressFill = document.getElementById("progress-fill");
+const progressValue = document.getElementById("progress-value");
+const siteContext = document.getElementById("site-context");
