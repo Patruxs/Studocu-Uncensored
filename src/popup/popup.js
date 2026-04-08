@@ -29,3 +29,14 @@ function updateStatus({ title, detail, progress, state = "ready" }) {
   statusPanel.dataset.state = state;
   setProgress(progress);
 }
+
+function setBusy(isBusy) {
+  for (const button of actionButtons) {
+    button.disabled = isBusy;
+  }
+}
+
+function getErrorMessage(error) {
+  if (error instanceof Error && error.message) return error.message;
+  return t("status.error.generic");
+}
