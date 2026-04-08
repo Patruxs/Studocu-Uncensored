@@ -55,3 +55,28 @@ function isSupportedTab(tab) {
     return false;
   }
 }
+
+async function requireStudocuTab() {
+  const tab = await getCurrentTab();
+  if (!isSupportedTab(tab)) {
+    throw new Error(t("status.error.tab"));
+  }
+  return tab;
+}
+
+async function runTask(task) {
+  setBusy(true);
+  try {
+    await task();
+  } catch (error) {
+    updateStatus({
+      title: t("status.error.title"),
+      detail: getErrorMessage(error),
+      progress: 100,
+      state: "error",
+    });
+    console.error("[StudocuHelper] Popup action failed:", error);
+  } finally {
+    setBusy(false);
+  }
+}
