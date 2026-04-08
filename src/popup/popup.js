@@ -40,3 +40,18 @@ function getErrorMessage(error) {
   if (error instanceof Error && error.message) return error.message;
   return t("status.error.generic");
 }
+
+async function getCurrentTab() {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (!tab?.id) throw new Error(t("status.error.noTab"));
+  return tab;
+}
+
+function isSupportedTab(tab) {
+  if (!tab.url) return false;
+  try {
+    return isStudocuHost(new URL(tab.url).hostname);
+  } catch {
+    return false;
+  }
+}
