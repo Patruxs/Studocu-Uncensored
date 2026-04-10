@@ -80,3 +80,77 @@ async function runTask(task) {
     setBusy(false);
   }
 }
+
+async function clearStudocuCookiesAndReload(tab) {
+  updateStatus({
+    title: t("status.unblur.reloading"),
+    detail: t("status.unblur.notFound"),
+    progress: 72,
+    state: "working",
+  });
+
+  const TLDs = [
+    "com", "vn", "de", "fr", "it", "es", "pl", "co", "id", "nl",
+    "be", "ch", "at", "in", "ph", "se", "no", "dk", "fi", "pt",
+    "ro", "hu", "cz", "gr",
+  ];
+
+  let studocuCookies = [];
+  for (const tld of TLDs) {
+    try {
+      const domainCookies = await chrome.cookies.getAll({
+        domain: `.studocu.${tld}`,
+      });
+      studocuCookies = studocuCookies.concat(domainCookies);
+    } catch {
+    }
+  }
+
+  for (const tld of TLDs) {
+    try {
+      const domainCookies = await chrome.cookies.getAll({
+        domain: `studocu.${tld}`,
+      });
+      studocuCookies = studocuCookies.concat(domainCookies);
+    } catch {
+    }
+  }
+
+  const seen = new Set();
+  studocuCookies = studocuCookies.filter((c) => {
+    const key = `${c.name}|${c.domain}|${c.path}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  for (const [index, cookie] of studocuCookies.entries()) {
+    const cleanDomain = cookie.domain.startsWith(".")
+      ? cookie.domain.slice(1)
+      : cookie.domain;
+    const protocol = cookie.secure ? "https:" : "http:";
+    const url = `${protocol}//${cleanDomain}${cookie.path}`;
+
+    await chrome.cookies.remove({
+      url,
+      name: cookie.name,
+      storeId: cookie.storeId,
+    });
+
+    const removalProgress = studocuCookies.length
+      ? 72 + ((index + 1) / studocuCookies.length) * 23
+      : 95;
+    setProgress(removalProgress);
+  }
+
+  updateStatus({
+    title: t("status.unblur.reloading"),
+    detail: t("status.unblur.reloadingDetail", { count: studocuCookies.length }),
+    progress: 100,
+    state: "success",
+  });
+
+  setTimeout(() => chrome.tabs.reload(tab.id), 650);
+}
+
+// ── Clear cookies & reload (like Studocu-Helper) ──────────
