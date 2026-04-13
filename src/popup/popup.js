@@ -249,3 +249,32 @@ document.getElementById("checkBtn").addEventListener("click", () => runTask(asyn
     state: "success",
   });
 }));
+
+async function startup() {
+  if (i18n) {
+    await i18n.loadLang();
+    i18n.updateDOM();
+  }
+
+  try {
+    const tab = await getCurrentTab();
+    if (isSupportedTab(tab)) {
+      const hostname = new URL(tab.url).hostname.replace(/^www\./, "");
+      siteContext.textContent = hostname;
+      siteContext.title = hostname;
+      return;
+    }
+
+    siteContext.textContent = t("popup.siteContext.noDocument");
+    updateStatus({
+      title: t("status.noDocument.title"),
+      detail: t("status.noDocument.detail"),
+      progress: 0,
+      state: "ready",
+    });
+  } catch {
+    siteContext.textContent = t("popup.siteContext.unavailable");
+  }
+}
+
+startup();
