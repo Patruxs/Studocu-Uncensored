@@ -154,3 +154,98 @@ async function clearStudocuCookiesAndReload(tab) {
 }
 
 // ── Clear cookies & reload (like Studocu-Helper) ──────────
+document.getElementById("clearBtn").addEventListener("click", () => runTask(async () => {
+  updateStatus({
+    title: t("status.unblur.scanning"),
+    detail: t("status.unblur.scanningDetail"),
+    progress: 12,
+    state: "working",
+  });
+
+  const tab = await requireStudocuTab();
+  setProgress(28);
+
+  const allCookies = await chrome.cookies.getAll({});
+
+  let count = 0;
+  for (const cookie of allCookies) {
+    if (cookie.domain.includes("studocu")) {
+      const cleanDomain = cookie.domain.startsWith(".")
+        ? cookie.domain.slice(1)
+        : cookie.domain;
+      const protocol = cookie.secure ? "https:" : "http:";
+      const url = `${protocol}//${cleanDomain}${cookie.path}`;
+      await chrome.cookies.remove({
+        url,
+        name: cookie.name,
+        storeId: cookie.storeId,
+      });
+      count++;
+    }
+  }
+
+  setProgress(72);
+
+  updateStatus({
+    title: t("status.unblur.reloading"),
+    detail: t("status.unblur.reloadingDetail", { count }),
+    progress: 100,
+    state: "success",
+  });
+
+  setTimeout(() => chrome.tabs.reload(tab.id), 650);
+}));
+
+document.getElementById("checkBtn").addEventListener("click", () => runTask(async () => {
+  updateStatus({
+    title: t("status.export.preparing"),
+    detail: t("status.export.preparingDetail"),
+    progress: 10,
+    state: "working",
+  });
+
+  const tab = await requireStudocuTab();
+
+  await chrome.scripting.insertCSS({
+    target: { tabId: tab.id },
+    files: ["src/content/styles/viewer.css"],
+  });
+
+  updateStatus({
+    title: t("status.export.starting"),
+    detail: t("status.export.startingDetail"),
+    progress: 38,
+    state: "working",
+  });
+
+  const lang = i18n?.lang?.() ?? "en";
+  await chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: (l) => { window.__STUDOCU_LANG__ = l; },
+    args: [lang],
+  });
+
+  await chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    files: [
+      "src/content/core/config.js",
+      "src/content/core/logger.js",
+      "src/content/core/i18n.js",
+      "src/content/core/selectors.js",
+      "src/content/shared/dom-utils.js",
+      "src/content/shared/storage.js",
+      "src/content/shared/style-cloner.js",
+      "src/content/shared/telemetry.js",
+      "src/content/features/pdf-export/auto-scroller.js",
+      "src/content/features/pdf-export/pdf-builder.js",
+      "src/content/features/pdf-export/injector.js",
+    ],
+  });
+
+  updateStatus({
+    title: t("status.export.running"),
+    detail: t("status.export.runningDetail"),
+    progress: 100,
+    state: "success",
+  });
+}));
