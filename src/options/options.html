@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studocu Uncensored — Settings</title>
+  <main class="shell">
+    <header class="masthead">
+      <div class="brand-mark" aria-hidden="true">SU</div>
+      <div class="brand-copy">
+        <h1>Studocu<br>Uncensored</h1>
+        <p>Extension settings</p>
+      </div>
+    </header>
+
+    <form id="options-form" class="options-form" aria-label="Extension settings">
+      <!-- Language -->
+      <fieldset class="option-group">
+        <legend class="option-legend">
+          <span class="option-icon" aria-hidden="true">🌐</span>
+          <span data-i18n="options.language.label">UI Language / Ngôn ngữ</span>
+        </legend>
+        <div class="option-body">
+          <p class="option-desc" data-i18n="options.language.desc">
+            Choose the language for the popup and viewer interface.
+          </p>
+          <label class="radio-row">
+            <input type="radio" name="lang" value="en">
+            <span class="radio-copy">
+              <span class="radio-title">English</span>
+              <span class="radio-sub">Popup, buttons, and status messages in English.</span>
+            </span>
+          </label>
+          <label class="radio-row">
+            <input type="radio" name="lang" value="vi">
+            <span class="radio-copy">
+              <span class="radio-title">Tiếng Việt</span>
+              <span class="radio-sub">Giao diện popup, nút bấm và thông báo bằng tiếng Việt.</span>
+            </span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Paper size -->
+      <fieldset class="option-group">
+        <legend class="option-legend">
+          <span class="option-icon" aria-hidden="true">📄</span>
+          <span data-i18n="options.paperSize.label">Paper Size / Khổ giấy</span>
+        </legend>
+        <div class="option-body">
+          <p class="option-desc" data-i18n="options.paperSize.desc">
+            PDF page dimensions for export.
+          </p>
+          <label class="radio-row">
+            <input type="radio" name="paperSize" value="A4">
+            <span class="radio-copy">
+              <span class="radio-title">A4</span>
+              <span class="radio-sub">210 × 297 mm — Standard in most countries.</span>
+            </span>
+          </label>
+          <label class="radio-row">
+            <input type="radio" name="paperSize" value="Letter">
+            <span class="radio-copy">
+              <span class="radio-title">Letter</span>
+              <span class="radio-sub">215.9 × 279.4 mm — Common in North America.</span>
+            </span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Scale factor -->
+      <fieldset class="option-group">
+        <legend class="option-legend">
+          <span class="option-icon" aria-hidden="true">🔍</span>
+          <span data-i18n="options.scale.label">Scale Factor / Tỉ lệ</span>
+        </legend>
+        <div class="option-body">
+          <p class="option-desc" data-i18n="options.scale.desc">
+            Controls text size in the exported PDF. Higher values produce sharper text but larger file sizes.
+          </p>
+          <div class="scale-control">
+            <input
+              type="range"
+              name="scaleFactor"
+              id="scaleFactor"
+              min="2"
+              max="8"
+              step="1"
+              value="4"
+              aria-label="Scale factor"
+            >
+            <output for="scaleFactor" id="scaleFactorValue">4×</output>
+          </div>
+          <div class="scale-labels">
+            <span data-i18n="options.scale.low">Smaller file</span>
+            <span data-i18n="options.scale.high">Sharper text</span>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+    <footer class="footnote">
+      <span class="save-indicator" id="save-indicator" aria-live="polite"></span>
+      <span data-i18n="options.footer">Settings are saved automatically</span>
+    </footer>
+  </main>
+
+  <script src="options.js"></script>
+</body>
+</html>
