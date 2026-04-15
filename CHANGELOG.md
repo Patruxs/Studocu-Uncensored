@@ -2,6 +2,14 @@
 
 All notable changes to this project are documented in this file.
 
+## 1.2 - 2026-04-15
+
+### Added
+- Localisation support, with English and Vietnamese strings
+
+### Fixed
+- Options page not reflecting saved values on first open
+
 ## 1.1 - 2026-03-04
 
 ### Added
