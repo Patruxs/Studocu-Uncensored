@@ -1,0 +1,28 @@
+:root {
+  color-scheme: light dark;
+  --page: #f1f2ec;
+  --surface: #fafbf6;
+  --surface-muted: #e7e9e1;
+  --ink: #171a17;
+  --ink-soft: #60665f;
+  --line: #cfd3ca;
+  --accent: #a8bd49;
+  --accent-strong: #718328;
+  --accent-ink: #171a17;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-width: 480px;
+  min-height: 520px;
+  background: var(--page);
+  color: var(--ink);
+  font-family: "Avenir Next", Avenir, "Segoe UI Variable", "Segoe UI", sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
