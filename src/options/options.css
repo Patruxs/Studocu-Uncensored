@@ -26,3 +26,11 @@ html, body {
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
 }
+
+.shell {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 28px 24px 20px;
+}
+
+/* Masthead — matching popup */
