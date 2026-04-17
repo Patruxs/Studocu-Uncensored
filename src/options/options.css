@@ -72,3 +72,17 @@ html, body {
   font-size: 10px;
   letter-spacing: 0.04em;
 }
+
+/* Option groups */
+.options-form {
+  display: grid;
+  gap: 16px;
+}
+
+.option-group {
+  margin: 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
