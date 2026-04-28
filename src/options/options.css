@@ -126,3 +126,13 @@ html, body {
   cursor: pointer;
   transition: border-color 180ms var(--ease), background-color 180ms var(--ease);
 }
+
+.radio-row:hover {
+  border-color: var(--accent-strong);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.radio-row:has(input:checked) {
+  border-color: var(--accent-strong);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
