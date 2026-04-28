@@ -113,3 +113,16 @@ html, body {
   font-size: 12px;
   line-height: 1.45;
 }
+
+/* Radio rows */
+.radio-row {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  align-items: start;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 180ms var(--ease), background-color 180ms var(--ease);
+}
