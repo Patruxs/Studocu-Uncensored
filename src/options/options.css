@@ -136,3 +136,14 @@ html, body {
   border-color: var(--accent-strong);
   background: color-mix(in srgb, var(--accent) 14%, transparent);
 }
+
+.radio-row input[type="radio"] {
+  margin-top: 3px;
+  accent-color: var(--accent-strong);
+}
+
+.radio-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
