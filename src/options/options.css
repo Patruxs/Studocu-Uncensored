@@ -147,3 +147,15 @@ html, body {
   flex-direction: column;
   gap: 3px;
 }
+
+.radio-title {
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.radio-sub {
+  color: var(--ink-soft);
+  font-size: 11px;
+  line-height: 1.35;
+}
