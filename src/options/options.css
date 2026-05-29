@@ -166,3 +166,24 @@ html, body {
   align-items: center;
   gap: 14px;
 }
+
+.scale-control input[type="range"] {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-muted);
+  -webkit-appearance: none;
+  appearance: none;
+  accent-color: var(--accent-strong);
+}
+
+.scale-control input[type="range"]::-webkit-slider-thumb {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--accent-strong);
+  border-radius: 50%;
+  background: var(--surface);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
