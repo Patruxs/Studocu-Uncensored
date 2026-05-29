@@ -159,3 +159,10 @@ html, body {
   font-size: 11px;
   line-height: 1.35;
 }
+
+/* Scale control */
+.scale-control {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
