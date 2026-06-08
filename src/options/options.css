@@ -187,3 +187,23 @@ html, body {
   -webkit-appearance: none;
   appearance: none;
 }
+
+.scale-control output {
+  min-width: 32px;
+  color: var(--accent-strong);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.scale-labels {
+  display: flex;
+  justify-content: space-between;
+  color: var(--ink-soft);
+  font-size: 10px;
+  margin-top: -2px;
+}
+
+/* Footer */
