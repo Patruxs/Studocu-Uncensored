@@ -207,3 +207,19 @@ html, body {
 }
 
 /* Footer */
+.footnote {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+  color: var(--ink-soft);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.save-indicator {
+  color: var(--accent-strong);
+  font-weight: 650;
+}
