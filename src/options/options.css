@@ -223,3 +223,13 @@ html, body {
   color: var(--accent-strong);
   font-weight: 650;
 }
+
+.save-indicator.saved {
+  animation: flash-saved 600ms var(--ease);
+}
+
+@keyframes flash-saved {
+  0%   { opacity: 0; transform: translateY(2px); }
+  40%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0.6; }
+}
