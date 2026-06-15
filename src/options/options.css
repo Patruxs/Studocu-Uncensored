@@ -233,3 +233,25 @@ html, body {
   40%  { opacity: 1; transform: translateY(0); }
   100% { opacity: 0.6; }
 }
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #111411;
+    --surface: #1a1e1a;
+    --surface-muted: #2a3029;
+    --ink: #edf0e8;
+    --ink-soft: #a6ada2;
+    --line: #363d35;
+    --accent: #b9ca67;
+    --accent-strong: #c7da71;
+    --accent-ink: #171a17;
+  }
+
+  .brand-mark {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--page);
+    box-shadow: inset 0 0 0 3px var(--page);
+  }
+}
