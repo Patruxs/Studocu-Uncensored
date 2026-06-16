@@ -14,4 +14,6 @@
     Letter: { width: 612.0, height: 792.0 },   /* 215.9×279.4 mm @ 72 dpi */
   };
 
+  /* ── DOM refs ──────────────────────────────────────────── */
+  const form = document.getElementById("options-form");
 })();
