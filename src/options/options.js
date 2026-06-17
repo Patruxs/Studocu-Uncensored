@@ -16,4 +16,7 @@
 
   /* ── DOM refs ──────────────────────────────────────────── */
   const form = document.getElementById("options-form");
+  const langRadios = form.querySelectorAll('input[name="lang"]');
+  const paperRadios = form.querySelectorAll('input[name="paperSize"]');
+  const scaleSlider = document.getElementById("scaleFactor");
 })();
