@@ -22,4 +22,21 @@
   const scaleValue = document.getElementById("scaleFactorValue");
   const saveIndicator = document.getElementById("save-indicator");
 
+  /* ── load ──────────────────────────────────────────────── */
+  async function loadSettings() {
+    let stored = {};
+    try {
+      stored = await chrome.storage.sync.get(DEFAULTS);
+    } catch (_) { /* use defaults */ }
+
+    const lang    = stored.lang    ?? DEFAULTS.lang;
+    const paper   = stored.paperSize ?? DEFAULTS.paperSize;
+    const scale   = stored.scaleFactor ?? DEFAULTS.scaleFactor;
+
+    setRadio("lang",      lang);
+    setRadio("paperSize", paper);
+    scaleSlider.value = scale;
+    updateScaleOutput(scale);
+  }
+
 })();
