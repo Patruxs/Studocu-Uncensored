@@ -39,4 +39,13 @@
     updateScaleOutput(scale);
   }
 
+  function setRadio(name, value) {
+    const radio = form.querySelector(`input[name="${name}"][value="${value}"]`);
+    if (radio) radio.checked = true;
+  }
+
+  function updateScaleOutput(val) {
+    scaleValue.textContent = val + "×";
+  }
+
 })();
