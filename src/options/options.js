@@ -19,4 +19,7 @@
   const langRadios = form.querySelectorAll('input[name="lang"]');
   const paperRadios = form.querySelectorAll('input[name="paperSize"]');
   const scaleSlider = document.getElementById("scaleFactor");
+  const scaleValue = document.getElementById("scaleFactorValue");
+  const saveIndicator = document.getElementById("save-indicator");
+
 })();
