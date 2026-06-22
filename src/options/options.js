@@ -48,4 +48,27 @@
     scaleValue.textContent = val + "×";
   }
 
+  /* ── save ──────────────────────────────────────────────── */
+  async function saveSettings(changed) {
+    const payload = {};
+    for (const [key, val] of Object.entries(changed)) {
+      payload[key] = val;
+    }
+
+    /* also persist paper dimensions so content scripts can read them */
+    if (changed.paperSize) {
+      const dims = PAPER_SIZES[changed.paperSize] || PAPER_SIZES.A4;
+      payload.fallbackWidthPx  = dims.width;
+      payload.fallbackHeightPx = dims.height;
+    }
+
+    try {
+      await chrome.storage.sync.set(payload);
+      indicateSaved();
+    } catch (err) {
+      console.error("[StudocuHelper] Failed to save settings:", err);
+      indicateError();
+    }
+  }
+
 })();
