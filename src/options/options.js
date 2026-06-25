@@ -73,4 +73,25 @@
 
   /* ── feedback ──────────────────────────────────────────── */
   let saveTimer = null;
+  function indicateSaved() {
+    if (saveTimer) clearTimeout(saveTimer);
+    saveIndicator.textContent = "✓ Saved";
+    saveIndicator.classList.remove("saved");
+    void saveIndicator.offsetWidth; /* force reflow */
+    saveIndicator.classList.add("saved");
+    saveTimer = setTimeout(() => {
+      saveIndicator.textContent = "";
+    }, 1800);
+  }
+
+  function indicateError() {
+    saveIndicator.textContent = "Save failed";
+    saveIndicator.style.color = "#a9443f";
+    setTimeout(() => {
+      saveIndicator.textContent = "";
+      saveIndicator.style.color = "";
+    }, 2200);
+  }
+
+  /* ── event wiring ─────────────────────────────────────── */
 })();
