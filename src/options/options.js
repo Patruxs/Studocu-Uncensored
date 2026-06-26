@@ -94,4 +94,16 @@
   }
 
   /* ── event wiring ─────────────────────────────────────── */
+  for (const radio of langRadios) {
+    radio.addEventListener("change", () => {
+      if (radio.checked) saveSettings({ lang: radio.value });
+    });
+  }
+
+  for (const radio of paperRadios) {
+    radio.addEventListener("change", () => {
+      if (radio.checked) saveSettings({ paperSize: radio.value });
+    });
+  }
+
 })();
