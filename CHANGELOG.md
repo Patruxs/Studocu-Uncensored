@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## 1.3 - 2026-07-01
+
+### Fixed
+- Unblur missing pages injected after the initial render
+- Export skipping the last page on short documents
+
 ## 1.2 - 2026-04-15
 
 ### Added
