@@ -106,4 +106,14 @@
     });
   }
 
+  scaleSlider.addEventListener("input", () => {
+    const val = Number(scaleSlider.value);
+    updateScaleOutput(val);
+  });
+
+  scaleSlider.addEventListener("change", () => {
+    const val = Number(scaleSlider.value);
+    saveSettings({ scaleFactor: val });
+  });
+
 })();
