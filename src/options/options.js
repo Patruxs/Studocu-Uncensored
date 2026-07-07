@@ -116,4 +116,6 @@
     saveSettings({ scaleFactor: val });
   });
 
+  /* ── kick off ─────────────────────────────────────────── */
+  loadSettings();
 })();
