@@ -80,4 +80,21 @@
     }, FLUSH_INTERVAL_MS);
   }
 
+  async function flushNow() {
+    if (flushTimer) {
+      clearTimeout(flushTimer);
+      flushTimer = null;
+    }
+    if (flushing) await flushing;
+    if (dirty) await persist();
+  }
+
+  /* ── public API ────────────────────────────────────────── */
+  function increment(key, delta = 1) {
+    if (key in counters) {
+      counters[key] += delta;
+      scheduleFlush();
+    }
+  }
+
 })(window);
