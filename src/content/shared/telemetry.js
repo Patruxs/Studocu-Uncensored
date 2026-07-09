@@ -24,4 +24,8 @@
   };
 
   let dirty = false;
+  let flushTimer = null;
+  let flushing = null; // pending flush promise
+
+  /* ── load persisted counters on init ───────────────────── */
 })(window);
