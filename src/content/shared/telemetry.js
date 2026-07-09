@@ -48,4 +48,36 @@
   }
 
   /* ── persist ───────────────────────────────────────────── */
+  async function persist() {
+    if (!hasChromeStorageLocal) return;
+    try {
+      await new Promise((resolve, reject) => {
+        chrome.storage.local.set(
+          { [STORAGE_KEY]: { ...counters } },
+          () => {
+            if (chrome.runtime.lastError) {
+              reject(chrome.runtime.lastError);
+            } else {
+              resolve();
+            }
+          }
+        );
+      });
+      dirty = false;
+    } catch (err) {
+      // non-critical; will retry on next flush
+    }
+  }
+
+  function scheduleFlush() {
+    dirty = true;
+    if (flushTimer) return;
+    flushTimer = setTimeout(async () => {
+      flushTimer = null;
+      flushing = persist();
+      await flushing;
+      flushing = null;
+    }, FLUSH_INTERVAL_MS);
+  }
+
 })(window);
