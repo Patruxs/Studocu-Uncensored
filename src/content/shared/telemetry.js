@@ -97,4 +97,9 @@
     }
   }
 
+  function getCounters() {
+    return { ...counters };
+  }
+
+  /* convenience recorders */
 })(window);
