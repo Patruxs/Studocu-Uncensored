@@ -102,4 +102,18 @@
   }
 
   /* convenience recorders */
+  function recordUnblurSuccess(stats) {
+    increment("unblurAttempts");
+    increment("unblurSuccesses");
+    if (stats) {
+      increment("totalBlursRemoved", stats.blursRemoved || 0);
+      increment("totalOverlaysHidden", stats.overlaysHidden || 0);
+    }
+  }
+
+  function recordUnblurFallback() {
+    increment("unblurAttempts");
+    increment("unblurFallbackCookies");
+  }
+
 })(window);
