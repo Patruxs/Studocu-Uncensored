@@ -116,4 +116,13 @@
     increment("unblurFallbackCookies");
   }
 
+  function recordExportAttempt() {
+    increment("exportAttempts");
+  }
+
+  function recordExportSuccess(pageCount) {
+    increment("exportSuccesses");
+    increment("totalPagesExported", pageCount || 0);
+  }
+
 })(window);
