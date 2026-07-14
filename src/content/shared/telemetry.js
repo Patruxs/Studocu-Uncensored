@@ -125,4 +125,12 @@
     increment("totalPagesExported", pageCount || 0);
   }
 
+  function recordExportFailure() {
+    increment("exportFailures");
+  }
+
+  function recordCrash() {
+    increment("crashes");
+  }
+
 })(window);
