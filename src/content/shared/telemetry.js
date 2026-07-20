@@ -151,4 +151,19 @@
   }
 
   /* ── init & expose ─────────────────────────────────────── */
+  loadPersisted();
+
+  STUDOCU.telemetry = {
+    increment,
+    getCounters,
+    recordUnblurSuccess,
+    recordUnblurFallback,
+    recordExportAttempt,
+    recordExportSuccess,
+    recordExportFailure,
+    recordCrash,
+    resetCounters,
+    flushNow,
+    STORAGE_KEY,
+  };
 })(window);
