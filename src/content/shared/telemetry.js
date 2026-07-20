@@ -133,4 +133,22 @@
     increment("crashes");
   }
 
+  function resetCounters() {
+    counters = {
+      unblurAttempts: 0,
+      unblurSuccesses: 0,
+      unblurFallbackCookies: 0,
+      exportAttempts: 0,
+      exportSuccesses: 0,
+      exportFailures: 0,
+      crashes: 0,
+      totalPagesExported: 0,
+      totalBlursRemoved: 0,
+      totalOverlaysHidden: 0,
+    };
+    dirty = true;
+    return flushNow();
+  }
+
+  /* ── init & expose ─────────────────────────────────────── */
 })(window);
