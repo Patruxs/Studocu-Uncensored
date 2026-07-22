@@ -6,3 +6,9 @@ import path from "node:path";
 const projectRoot = path.resolve(fileURLToPath(new URL("..", import.meta.url)));
 const distDir = path.join(projectRoot, "dist");
 const watchMode = process.argv.includes("--watch");
+const supportedStudocuHosts = [
+  "*://*.studocu.com/*",
+  "*://*.studocu.vn/*",
+];
+
+let buildRunning = false;
