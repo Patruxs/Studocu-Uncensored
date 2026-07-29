@@ -12,3 +12,5 @@ const supportedStudocuHosts = [
 ];
 
 let buildRunning = false;
+let rebuildRequested = false;
+let debounceTimer;
