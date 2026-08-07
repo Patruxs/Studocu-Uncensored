@@ -74,3 +74,22 @@ function scheduleBuild() {
   clearTimeout(debounceTimer);
   debounceTimer = setTimeout(build, 100);
 }
+
+await build();
+
+if (watchMode) {
+  const watchers = [
+    watch(path.join(projectRoot, "manifest.json"), scheduleBuild),
+    watch(path.join(projectRoot, "src"), { recursive: true }, scheduleBuild),
+  ];
+
+  const stop = () => {
+    clearTimeout(debounceTimer);
+    watchers.forEach((watcher) => watcher.close());
+    process.exit(0);
+  };
+
+  process.on("SIGINT", stop);
+  process.on("SIGTERM", stop);
+  console.log("[dist] Watching manifest.json and src/ for changes. Press Ctrl+C to stop.");
+}
