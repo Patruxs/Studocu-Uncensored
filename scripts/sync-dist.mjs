@@ -40,3 +40,37 @@ async function validateManifest() {
     );
   });
 }
+
+async function build() {
+  if (buildRunning) {
+    rebuildRequested = true;
+    return;
+  }
+
+  buildRunning = true;
+
+  try {
+    await validateManifest();
+    await rm(distDir, { recursive: true, force: true });
+    await mkdir(distDir, { recursive: true });
+    await cp(path.join(projectRoot, "manifest.json"), path.join(distDir, "manifest.json"));
+    await cp(path.join(projectRoot, "src"), path.join(distDir, "src"), {
+      recursive: true,
+    });
+    console.log(`[dist] Updated at ${new Date().toLocaleTimeString()}`);
+  } catch (error) {
+    console.error("[dist] Build failed:", error);
+  } finally {
+    buildRunning = false;
+
+    if (rebuildRequested) {
+      rebuildRequested = false;
+      await build();
+    }
+  }
+}
+
+function scheduleBuild() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(build, 100);
+}
