@@ -2,6 +2,19 @@
 
 All notable changes to this project are documented in this file.
 
+## 2.0 - 2026-08-25
+
+### Added
+- Options page for export quality, language and telemetry preferences
+- Progress indicator in the popup while a PDF is being generated
+
+### Changed
+- Narrowed host permissions to Studocu domains only
+- Reworked the popup around a single primary action
+
+### Removed
+- Preview overlay, which was slower than exporting directly
+
 ## 1.3 - 2026-07-01
 
 ### Fixed
